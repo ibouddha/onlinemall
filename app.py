@@ -23,4 +23,4 @@ def login():
     if form.validate_on_submit():
         # ... login logic ...
         return redirect(url_for('home'))
-    return render_template('login.html', form=form)  # Pass the form object here
+    return render_template('login.html', form=form)  # Pass the form object here 
