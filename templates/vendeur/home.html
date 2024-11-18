@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vendeur - Online Mall</title>
+    <!-- Bootstrap CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Basic styling */
+      body,
+      html {
+        height: 100%;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+      }
+
+      /* Main content */
+      .main-content {
+        padding: 4rem;
+        color: #333;
+      }
+
+      /* Sidebar styling */
+      .sidebar {
+        width: 350px;
+        background-color: #44475a;
+        color: #f8f9fa;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        box-shadow: -3px 0px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1050;
+        padding: 2rem;
+      }
+
+      .sidebar h2 {
+        color: #f8f9fa;
+        font-weight: 600;
+      }
+
+      /* Tab navigation styling */
+      .nav-tabs .nav-link {
+        color: #f8f9fa;
+        font-size: 1.1rem;
+        border: none;
+      }
+
+      .nav-tabs .nav-link.active {
+        background-color: #6c757d;
+        border-radius: 0.25rem;
+      }
+
+      /* Button and form styles */
+      .form-control {
+        border-radius: 5px;
+      }
+
+      .btn-primary,
+      .btn-success {
+        border-radius: 20px;
+      }
+
+      /* Button to toggle sidebar */
+      .toggle-sidebar-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1060;
+        background-color: #44475a;
+        color: #f8f9fa;
+        border: none;
+        padding: 0.75rem 1rem;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Active sidebar display */
+      .sidebar.active {
+        transform: translateX(0);
+      }
+
+      /* Close button for sidebar */
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: transparent;
+        border: none;
+        color: #f8f9fa;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <img
+            src='{{url_for("static", filename="images/logo.jpeg")}}'
+            alt="Logo"
+            class="me-2"
+            style="width: 5vw; height: 5vh"
+          />
+          Online Mall - Espace Vendeur
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#">Mes Produits</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Commandes</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Statistiques</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Profil</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Déconnexion</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+      <h1>Bienvenue, Vendeur</h1>
+      <p>Gérez vos produits, suivez vos commandes et consultez vos performances.</p>
+      <h2>Vos outils</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              src="https://via.placeholder.com/150"
+              class="card-img-top"
+              alt="Mes Produits"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Mes Produits</h5>
+              <p class="card-text">
+                Consultez et mettez à jour votre catalogue de produits.
+              </p>
+              <a href="#" class="btn btn-primary">Gérer</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              src="https://via.placeholder.com/150"
+              class="card-img-top"
+              alt="Commandes"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Commandes</h5>
+              <p class="card-text">
+                Suivez vos commandes et préparez les expéditions.
+              </p>
+              <a href="#" class="btn btn-primary">Voir</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              src="https://via.placeholder.com/150"
+              class="card-img-top"
+              alt="Statistiques"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Statistiques</h5>
+              <p class="card-text">
+                Analysez vos ventes et performances.
+              </p>
+              <a href="#" class="btn btn-primary">Consulter</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar for Vendeur -->
+    <div class="sidebar" id="sidebar">
+      <button class="close-btn" id="closeSidebar">&times;</button>
+      <h2>Navigation Vendeur</h2>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Mes Produits</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Commandes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Statistiques</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Profil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('logout') }}">Déconnexion</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Bootstrap JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript to toggle sidebar visibility -->
+    <script>
+      const toggleSidebarBtn = document.getElementById("toggleSidebar");
+      const sidebar = document.getElementById("sidebar");
+      const closeSidebarBtn = document.getElementById("closeSidebar");
+
+      toggleSidebarBtn.addEventListener("click", function () {
+        sidebar.classList.toggle("active");
+      });
+
+      closeSidebarBtn.addEventListener("click", function () {
+        sidebar.classList.remove("active");
+      });
+    </script>
+  </body>
+</html>
